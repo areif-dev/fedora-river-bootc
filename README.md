@@ -54,11 +54,11 @@ Once the image finishes installing, reboot the system and ssh into the root acco
 useradd -p "" -g wheel LOGIN
 ```
 
-Now switch to that user so you can set a proper password
+Now switch to that user so you can set a proper password.
 
 ```bash
 su LOGIN
 passwd
 ```
 
-And enjoy!
+It may also be a good idea to remove the authorized_keys from the root account if you don't intend on using them further. 

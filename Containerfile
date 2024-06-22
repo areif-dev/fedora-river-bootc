@@ -99,6 +99,12 @@ RUN dnf install -y \
     python3-libguestfs \
     virt-top 
 
+# Install any extra third party packages or other configs
+RUN mkdir -p /tmp/extras
+COPY ./extras.sh /tmp/extras/extras.sh
+RUN /tmp/extras/extras.sh && \
+    rm -rf /tmp/extras 
+
 # Enable services
 RUN systemctl enable libvirtd && \
     systemctl enable cockpit.socket && \

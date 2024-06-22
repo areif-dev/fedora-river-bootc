@@ -1,0 +1,98 @@
+---
+
+name: "Build Custom Fedora Bootc Image"
+
+permissions: 
+  contents: read
+  packages: write
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore: 
+      - 'README.md'
+      - 'LICENSE'
+      - 'screenshots/'
+  push:
+    branches:
+      - main
+    paths-ignore: 
+      - 'README.md'
+      - 'LICENSE'
+      - 'screenshots/'
+  schedule:
+    - cron: '0 16 * * *'  # Build at 16:00 UTC. A few hours after base fedora is updated
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build-push-images:
+    runs-on: ubuntu-latest
+    env:
+      platforms: 'linux/amd64'
+      registry: 'ghcr.io/areif-dev'
+      base_version: 40
+    steps:
+      - name: Generate tags
+        id: generate-tags
+        shell: bash
+        run: |
+          # Generate a timestamp for creating an image version history
+          TIMESTAMP="$(date +%Y%m%d)"
+          BUILD_TAGS=()
+          BUILD_TAGS+=("${TIMESTAMP}")
+          BUILD_TAGS+=("latest")
+          BUILD_TAGS+=("${{ env.base_version }}")
+          alias_tags=("${BUILD_TAGS[@]}")
+          echo "Generated the following build tags: "
+          for TAG in "${BUILD_TAGS[@]}"; do
+              echo "${TAG}"
+          done
+          echo "alias_tags=${alias_tags[*]}" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build container image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          platforms: ${{ env.platforms }}
+          context: ./
+          image: fedora-river-bootc
+          tags: | 
+            ${{ steps.generate-tags.outputs.alias_tags }}
+          containerfiles: ./Containerfile
+          layers: false
+          oci: true
+
+      - name: Push to Container Registry
+        uses: redhat-actions/push-to-registry@v2
+        id: push
+        with:
+          username: ${{ secrets.BOT_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          image: fedora-river-bootc
+          registry: ${{ env.registry }}
+          tags: |
+            ${{ steps.generate-tags.outputs.alias_tags }}
+
+      - name: Login to Container Registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.registry }}
+          username: ${{ secrets.BOT_USERNAME }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: sigstore/cosign-installer@v3.5.0
+
+      - name: Sign container image
+        run: |
+          cosign sign -y --recursive --key env://SIGNING_SECRET ${{ env.registry }}/fedora-river-bootc@${{ steps.push.outputs.digest }}
+        env:
+          COSIGN_EXPERIMENTAL: false
+          SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
+

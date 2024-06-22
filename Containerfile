@@ -52,6 +52,7 @@ RUN dnf install -y \
     swaylock \
     tailscale \
     waybar \
+    wget \
     wl-clipboard \
     wlr-randr \
     wireplumber \

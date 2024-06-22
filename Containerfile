@@ -68,6 +68,7 @@ RUN dnf install -y \
     bc \
     distrobox \
     firefox \
+    keepassxc \
     neovim \
     nvtop \
     openvpn \

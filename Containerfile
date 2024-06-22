@@ -100,6 +100,26 @@ RUN dnf install -y \
     python3-libguestfs \
     virt-top 
 
+# Wifi packages 
+RUN dnf install -y \
+    NetworkManager       \
+    NetworkManager-tui   \
+    NetworkManager-wifi  \
+    atheros-firmware     \
+    b43-fwcutter         \
+    b43-openfwwf         \
+    brcmfmac-firmware    \
+    iwlegacy-firmware    \
+    iwlwifi-dvm-firmware \
+    iwlwifi-mvm-firmware \
+    libertas-firmware    \
+    mt7xxx-firmware      \
+    nxpwireless-firmware \
+    realtek-firmware     \
+    tiwilink-firmware    \
+    atmel-firmware       \
+    zd1211-firmware
+
 # Install any extra third party packages or other configs
 RUN mkdir -p /tmp/extras
 COPY ./extras.sh /tmp/extras/extras.sh

@@ -30,6 +30,7 @@ RUN dnf install -y \
     dbus-daemon \
     dbus-tools \
     dunst \
+    git \
     gnome-keyring \
     gvfs-mtp \
     grim \

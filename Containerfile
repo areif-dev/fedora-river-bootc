@@ -39,7 +39,6 @@ RUN dnf install -y \
     cockpit-machines \
     cockpit-podman \
     cockpit-system \
-    cockpit-ws \
     dbus \
     dbus-daemon \
     dbus-tools \

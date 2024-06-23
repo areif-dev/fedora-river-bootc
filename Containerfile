@@ -36,6 +36,8 @@ RUN dnf install -y \
     grim \
     jmtpfs \
     lxpolkit \
+    man \
+    man-db \
     man-pages \
     nvtop \
     openssh \

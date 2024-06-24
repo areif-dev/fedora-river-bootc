@@ -51,7 +51,7 @@ podman run \
 Once the image finishes installing, reboot the system and ssh into the root account from a machine that you authorized previously. Now add your user account with the following: 
 
 ```bash
-useradd -p "" -g wheel LOGIN
+useradd -p "" -G <user>,wheel LOGIN
 ```
 
 Now switch to that user so you can set a proper password.

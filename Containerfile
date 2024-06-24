@@ -43,6 +43,7 @@ RUN dnf install -y \
     dbus-daemon \
     dbus-tools \
     dunst \
+    fwupd \
     git \
     gnome-keyring \
     gvfs-mtp \

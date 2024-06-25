@@ -149,7 +149,8 @@ RUN systemctl enable libvirtd && \
     systemctl enable cockpit.socket && \
     systemctl enable plocate-updatedb  && \
     mkdir -p /var/lib/plocate && \
-    systemctl enable tailscaled 
+    systemctl enable tailscaled && \
+    systemctl disable bootc-fetch-apply-updates.timer
 
 # Update and clean up 
 RUN dnf clean all && \

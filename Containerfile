@@ -50,7 +50,6 @@ RUN dnf install -y \
     grim \
     jmtpfs \
     lxpolkit \
-    man \
     man-db \
     man-pages \
     nvtop \
@@ -68,6 +67,7 @@ RUN dnf install -y \
     swayidle \
     swaylock \
     tailscale \
+    tldr \
     waybar \
     wget \
     wl-clipboard \

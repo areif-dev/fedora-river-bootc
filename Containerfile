@@ -59,6 +59,7 @@ RUN dnf install -y \
     papirus-icon-theme \
     pipewire \
     plocate \
+    podman-compose \
     polkit \
     river \
     river-bsp-layout \

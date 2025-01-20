@@ -39,26 +39,29 @@ RUN dnf install -y \
     cockpit-machines \
     cockpit-podman \
     cockpit-system \
+    cockpit-ws \
+    cups \
     dbus \
     dbus-daemon \
     dbus-tools \
     dunst \
     fwupd \
+    flatpak \
     git \
     gnome-keyring \
     gvfs-mtp \
     grim \
+    hyprland \
     jmtpfs \
     lxpolkit \
-    man \
     man-db \
     man-pages \
-    nvtop \
     openssh \
     openssl \
     papirus-icon-theme \
     pipewire \
     plocate \
+    podman \
     podman-compose \
     polkit \
     river \
@@ -67,25 +70,28 @@ RUN dnf install -y \
     swaybg \
     swayidle \
     swaylock \
+    syncthing \
+    system-config-printer \
     tailscale \
-    tldr \
     waybar \
-    wget \
     wl-clipboard \
     wlr-randr \
     wireplumber \
     xdg-desktop-portal-wlr \
+    xdg-desktop-portal-hyprland \
     xdg-user-dirs \
     xorg-x11-server-Xwayland \
     zsh \
-    zsh-autosuggestions 
+    zsh-autosuggestions
 
 # Applications 
 RUN dnf install -y \
     alacritty \
     bc \
     distrobox \
+    ffmpeg \
     firefox \
+    htop \
     keepassxc \
     neovim \
     nvtop \
@@ -97,9 +103,10 @@ RUN dnf install -y \
     thunar \
     thunar-archive-plugin \
     thunar-volman \
+    thunderbird \
     unzip \
     vlc  \
-    zip 
+    zip
 
 # Fonts 
 RUN dnf install -y \
@@ -109,16 +116,13 @@ RUN dnf install -y \
 
 # Virtualization packages 
 RUN dnf install -y \
-    virt-install \
     libvirt \
     libvirt-daemon-config-network \
     libvirt-daemon-kvm \
     qemu-kvm \
     virt-manager \
-    virt-viewer \
     libguestfs-tools \
-    python3-libguestfs \
-    virt-top 
+    python3-libguestfs 
 
 # Wifi packages 
 RUN dnf install -y \
@@ -138,7 +142,7 @@ RUN dnf install -y \
     realtek-firmware     \
     tiwilink-firmware    \
     atmel-firmware       \
-    zd1211-firmware
+    zd1211-firmware   
 
 # Install any extra third party packages or other configs
 RUN mkdir -p /tmp/extras

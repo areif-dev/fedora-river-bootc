@@ -35,7 +35,7 @@ jobs:
     env:
       platforms: 'linux/amd64'
       registry: 'ghcr.io/areif-dev'
-      base_version: 40
+      base_version: 41
     steps:
       - name: Generate tags
         id: generate-tags

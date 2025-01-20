@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM quay.io/fedora/fedora-bootc:40
+FROM quay.io/fedora/fedora-bootc:41
 
 COPY ./50-fedora-river-atomic.toml /usr/lib/bootc/install/50-fedora-river-atomic.toml
 

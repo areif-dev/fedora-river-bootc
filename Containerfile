@@ -152,7 +152,6 @@ RUN /tmp/extras/extras.sh && \
 
 # Enable services
 RUN systemctl enable libvirtd && \
-    systemctl enable cockpit.socket && \
     systemctl enable plocate-updatedb  && \
     mkdir -p /var/lib/plocate && \
     systemctl enable tailscaled && \
